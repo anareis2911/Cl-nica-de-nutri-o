@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Nutricionista</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+         <img src="assets/images/logo.png" alt="Logo Clínica">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="pacientes.html" class="nav-link" data-page="pacientes"><i class="fa-solid fa-user"></i></a></li>
+          <li><a href="consultas.html" class="nav-link" data-page="consultas"><i class="fa-solid fa-calendar"></i></a></li>
+          <li><a href="planos.html" class="nav-link" data-page="planos"><i class="fa-solid fa-utensils"></i></a></li>
+          <li><a href="relatorios.html" class="nav-link" data-page="relatorios"><i class="fa-solid fa-file-medical"></i></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main>
+      <!-- Topo -->
+      <header class="header">
+        <p>Bem-vindo(a)! <strong>Ana Carolina Reis</strong></p>
+        <div class="avatar">A</div>
+      </header>
+
+      <!-- Área de cards melhorada -->
+      <section class="cards">
+        <div class="card" data-target="pacientes.html">
+          <div class="card-icon"><i class="fa-solid fa-user"></i></div>
+          <span>Pacientes</span>
+        </div>
+        <div class="card" data-target="consultas.html">
+          <div class="card-icon"><i class="fa-solid fa-calendar"></i></div>
+          <span>Consultas</span>
+        </div>
+        <div class="card" data-target="planos.html">
+          <div class="card-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span>Planos Alimentares</span>
+        </div>
+        <div class="card" data-target="relatorios.html">
+          <div class="card-icon"><i class="fa-solid fa-file-medical"></i></div>
+          <span>Relatórios</span>
+        </div>
+        <div class="card" data-target="configuracoes.html">
+          <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
+          <span>Configurações</span>
+        </div>
+        <div class="card" data-target="ajuda.html">
+          <div class="card-icon"><i class="fa-solid fa-circle-question"></i></div>
+          <span>Ajuda</span>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

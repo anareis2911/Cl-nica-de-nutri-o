@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Nutricionista - Pacientes</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pacientes.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Logo Clínica">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html"><i class="fa-solid fa-grid"></i></a></li>
+          <li><a href="pacientes.html" class="active"><i class="fa-solid fa-user"></i></a></li>
+          <li><a href="consultas.html"><i class="fa-solid fa-calendar"></i></a></li>
+          <li><a href="planos.html"><i class="fa-solid fa-utensils"></i></a></li>
+          <li><a href="relatorios.html"><i class="fa-solid fa-file-medical"></i></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main>
+      <!-- Topo -->
+      <header class="header">
+        <div class="header-left">
+          <h1>Pacientes</h1>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <p>Bem-vindo(a), <strong>Ana Carolina Reis</strong></p>
+            <div class="avatar">A</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Conteúdo da página de pacientes -->
+      <section class="patients-content">
+        <!-- Barra de pesquisa -->
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Pesquisar paciente...">
+          <button class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        
+        <!-- Filtro alfabético -->
+        <div class="alphabet-filter">
+          <div class="letter-filter active">TODOS</div>
+          <div class="letter-filter">A</div>
+          <div class="letter-filter">B</div>
+          <div class="letter-filter">C</div>
+          <div class="letter-filter">D</div>
+          <div class="letter-filter">E</div>
+          <div class="letter-filter">F</div>
+          <div class="letter-filter">G</div>
+          <div class="letter-filter">H</div>
+          <div class="letter-filter">I</div>
+          <div class="letter-filter">J</div>
+          <div class="letter-filter">K</div>
+          <div class="letter-filter">L</div>
+          <div class="letter-filter">M</div>
+          <div class="letter-filter">N</div>
+          <div class="letter-filter">O</div>
+          <div class="letter-filter">P</div>
+          <div class="letter-filter">Q</div>
+          <div class="letter-filter">R</div>
+          <div class="letter-filter">S</div>
+          <div class="letter-filter">T</div>
+          <div class="letter-filter">U</div>
+          <div class="letter-filter">V</div>
+          <div class="letter-filter">W</div>
+          <div class="letter-filter">X</div>
+          <div class="letter-filter">Y</div>
+          <div class="letter-filter">Z</div>
+        </div>
+        
+        <!-- Lista de pacientes -->
+        <div class="patients-list">
+          <div class="list-header">
+            <span>Nome do Paciente</span>
+            <span>Contato</span>
+            <span>Última Consulta</span>
+            <span>Ações</span>
+          </div>
+          
+          <div class="patient-item">
+            <div class="patient-info">
+              <div class="patient-avatar">A</div>
+              <div class="patient-details">
+                <div class="patient-name">Ana Silva</div>
+                <div class="patient-age">32 anos</div>
+              </div>
+            </div>
+            <div class="patient-contact">
+              <div class="contact-email">anasilva@email.com</div>
+              <div class="contact-phone">(11) 99999-9999</div>
+            </div>
+            <div class="last-appointment">12/03/2023</div>
+            <div class="patient-actions">
+              <button class="btn-view"><i class="fas fa-eye"></i></button>
+              <button class="btn-edit"><i class="fas fa-edit"></i></button>
+              <button class="btn-more"><i class="fas fa-ellipsis-v"></i></button>
+            </div>
+          </div>
+          
+          <div class="patient-item">
+            <div class="patient-info">
+              <div class="patient-avatar">B</div>
+              <div class="patient-details">
+                <div class="patient-name">Bruno Santos</div>
+                <div class="patient-age">28 anos</div>
+              </div>
+            </div>
+            <div class="patient-contact">
+              <div class="contact-email">brunosantos@email.com</div>
+              <div class="contact-phone">(11) 98888-8888</div>
+            </div>
+            <div class="last-appointment">05/03/2023</div>
+            <div class="patient-actions">
+              <button class="btn-view"><i class="fas fa-eye"></i></button>
+              <button class="btn-edit"><i class="fas fa-edit"></i></button>
+              <button class="btn-more"><i class="fas fa-ellipsis-v"></i></button>
+            </div>
+          </div>
+          
+          <div class="patient-item">
+            <div class="patient-info">
+              <div class="patient-avatar">C</div>
+              <div class="patient-details">
+                <div class="patient-name">Carla Mendes</div>
+                <div class="patient-age">45 anos</div>
+              </div>
+            </div>
+            <div class="patient-contact">
+              <div class="contact-email">carlamendes@email.com</div>
+              <div class="contact-phone">(11) 97777-7777</div>
+            </div>
+            <div class="last-appointment">28/02/2023</div>
+            <div class="patient-actions">
+              <button class="btn-view"><i class="fas fa-eye"></i></button>
+              <button class="btn-edit"><i class="fas fa-edit"></i></button>
+              <button class="btn-more"><i class="fas fa-ellipsis-v"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/pacientes.js"></script>
+</body>
+</html>
