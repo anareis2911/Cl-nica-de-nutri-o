@@ -295,3 +295,20 @@ input[readonly] {
 input[type="tel"] {
   font-family: monospace;
 }
+
+/* Indicador de modo edição */
+.edit-mode-indicator {
+  background-color: #e8f4f8;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2980b9;
+  font-weight: 500;
+}
+
+.edit-mode-indicator i {
+  font-size: 18px;
+}

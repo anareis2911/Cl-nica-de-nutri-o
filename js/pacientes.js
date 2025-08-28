@@ -28,6 +28,8 @@ let pacienteFiltrado = [];
 let letraFiltroAtual = 'TODOS';
 let termoPesquisa = '';
 let pacienteIdParaExcluir = null;
+let modoEdicao = false;
+let pacienteEmEdicao = null;
 
 document.addEventListener('DOMContentLoaded', function() {
   initializePacientesPage();
@@ -200,13 +202,50 @@ function initializePatientActions() {
 /** Navega para detalhes */
 function visualizarPaciente(id) {
   const paciente = pacientes.find(p => p.id == id);
-  if (paciente) window.location.href = `paciente-detalhes.html?id=${id}`;
+  if (paciente) {
+    window.location.href = `paciente-detalhes.html?id=${id}`;
+  } else {
+    showNotification('Paciente não encontrado', 'error');
+  }
 }
 
-/** Navega para edição */
+/** Abre o modal para edição */
 function editarPaciente(id) {
   const paciente = pacientes.find(p => p.id == id);
-  if (paciente) window.location.href = `paciente-editar.html?id=${id}`;
+  if (!paciente) return;
+  
+  pacienteEmEdicao = paciente;
+  modoEdicao = true;
+  
+  // Preencher o formulário com os dados do paciente
+  document.getElementById('pacienteId').value = paciente.id;
+  document.getElementById('nome').value = paciente.nome || '';
+  document.getElementById('dataNascimento').value = paciente.dataNascimento || '';
+  document.getElementById('idade').value = paciente.idade || '';
+  document.getElementById('sexo').value = paciente.sexo || '';
+  document.getElementById('telefone').value = paciente.telefone || '';
+  document.getElementById('email').value = paciente.email || '';
+  document.getElementById('altura').value = paciente.altura || '';
+  document.getElementById('peso').value = paciente.peso || '';
+  document.getElementById('imc').value = paciente.imc || '';
+  document.getElementById('classificacao').value = paciente.classificacao || '';
+  document.getElementById('observacoes').value = paciente.observacoes || '';
+  
+  // Atualizar o título do modal
+  document.getElementById('tituloModalPaciente').textContent = 'Editar Paciente';
+  
+  // Adicionar indicador de modo de edição
+  let editIndicator = document.querySelector('.edit-mode-indicator');
+  if (!editIndicator) {
+    editIndicator = document.createElement('div');
+    editIndicator.className = 'edit-mode-indicator';
+    editIndicator.innerHTML = '<i class="fas fa-edit"></i> Modo de Edição';
+    document.querySelector('.modal-content').insertBefore(editIndicator, document.getElementById('patientForm'));
+  }
+  
+  // Abrir o modal
+  document.getElementById('patientModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 
 /** Exclui paciente usando modal de confirmação */
@@ -268,6 +307,7 @@ function initializePatientModal() {
   if (!modal || !btnAdd || !spanClose || !cancelBtn || !form) return;
 
   const open = () => { 
+    resetarModal();
     modal.style.display = 'flex'; 
     document.body.style.overflow = 'hidden'; 
     // Focar no primeiro campo ao abrir o modal
@@ -277,6 +317,10 @@ function initializePatientModal() {
   const close = () => {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+    resetarModal();
+  };
+  
+  const resetarModal = () => {
     form.reset();
     // Limpar mensajes de validación
     document.querySelectorAll('.validation-message').forEach(el => {
@@ -285,6 +329,19 @@ function initializePatientModal() {
     const imc = document.getElementById('imc'); if (imc) imc.value = '';
     const cls = document.getElementById('classificacao'); if (cls) cls.value = '';
     const idade = document.getElementById('idade'); if (idade) idade.value = '';
+    document.getElementById('pacienteId').value = '';
+    
+    // Restaurar título padrão
+    document.getElementById('tituloModalPaciente').textContent = 'Cadastrar Paciente';
+    
+    // Remover indicador de edição se existir
+    const editIndicator = document.querySelector('.edit-mode-indicator');
+    if (editIndicator) {
+      editIndicator.remove();
+    }
+    
+    modoEdicao = false;
+    pacienteEmEdicao = null;
   };
 
   btnAdd.addEventListener('click', open);
@@ -318,7 +375,11 @@ function initializePatientModal() {
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (validarFormulario()) {
-      salvarPaciente();
+      if (modoEdicao) {
+        atualizarPaciente();
+      } else {
+        salvarPaciente();
+      }
       close();
     }
   });
@@ -536,6 +597,55 @@ function salvarPaciente() {
   localStorage.setItem('nextPacienteId', String(nextId + 1));
   carregarPacientes();
   showNotification('Paciente cadastrado com sucesso!', 'success');
+}
+
+/** Atualiza paciente existente */
+function atualizarPaciente() {
+  const form = document.getElementById('patientForm');
+  const formData = new FormData(form);
+
+  const id = parseInt(formData.get('pacienteId') || '0', 10);
+  if (!id) return;
+  
+  const nome = formData.get('nome') || '';
+  const dataNascimento = formData.get('dataNascimento') || '';
+  
+  // Calcular idade a partir da data de nascimento
+  let idade = parseInt(formData.get('idade') || '0', 10);
+  if (!idade && dataNascimento) {
+    const hoje = new Date();
+    const nascimento = new Date(dataNascimento);
+    idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+      idade--;
+    }
+  }
+
+  // Encontrar o índice do paciente no array
+  const index = pacientes.findIndex(p => p.id === id);
+  if (index === -1) return;
+  
+  // Atualizar os dados do paciente
+  pacientes[index] = {
+    ...pacientes[index],
+    nome,
+    idade: idade,
+    sexo: formData.get('sexo') || '',
+    telefone: formData.get('telefone') || '',
+    email: formData.get('email') || '',
+    dataNascimento: dataNascimento,
+    altura: parseFloat(formData.get('altura') || '0'),
+    peso: parseFloat(formData.get('peso') || '0'),
+    imc: parseFloat((formData.get('imc') || '0').replace(',', '.')) || 0,
+    classificacao: formData.get('classificacao') || '',
+    observacoes: formData.get('observacoes') || '',
+    inicial: (nome || '?').charAt(0).toUpperCase()
+  };
+
+  saveToStorage('pacientes', pacientes);
+  carregarPacientes();
+  showNotification('Paciente atualizado com sucesso!', 'success');
 }
 
 /** Exporta CSV (mantido) */

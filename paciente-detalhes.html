@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Paciente - Sistema Nutricionista</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/paciente-detalhes.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Logo Clínica">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html"><i class="fa-solid fa-grid"></i></a></li>
+          <li><a href="pacientes.html"><i class="fa-solid fa-user"></i></a></li>
+          <li><a href="consultas.html"><i class="fa-solid fa-calendar"></i></a></li>
+          <li><a href="planos.html"><i class="fa-solid fa-utensils"></i></a></li>
+          <li><a href="relatorios.html"><i class="fa-solid fa-file-medical"></i></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main>
+      <!-- Topo -->
+      <header class="header">
+        <div class="header-left">
+          <h1>Detalhes do Paciente</h1>
+          <nav class="breadcrumb">
+            <a href="pacientes.html">Pacientes</a> > <span id="breadcrumb-nome">Detalhes</span>
+          </nav>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <p>Bem-vindo(a), <strong>Ana Carolina Reis</strong></p>
+            <div class="avatar">A</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Conteúdo da página de detalhes -->
+      <section class="patient-details-content">
+        <div class="patient-header">
+          <div class="patient-avatar-large">
+            <span id="avatar-inicial">?</span>
+          </div>
+          <div class="patient-header-info">
+            <h2 id="patient-name">Carregando...</h2>
+            <div class="patient-meta">
+              <span id="patient-age"></span>
+              <span id="patient-gender"></span>
+              <span id="patient-id"></span>
+            </div>
+          </div>
+          <div class="patient-actions">
+            <button id="btn-edit" class="btn-edit-large">
+              <i class="fas fa-edit"></i> Editar
+            </button>
+            <button id="btn-consulta" class="btn-primary-large">
+              <i class="fas fa-calendar-plus"></i> Nova Consulta
+            </button>
+          </div>
+        </div>
+
+        <div class="patient-tabs">
+          <button class="tab-button active" data-tab="info">Informações Pessoais</button>
+          <button class="tab-button" data-tab="consultas">Histórico de Consultas</button>
+          <button class="tab-button" data-tab="evolucao">Evolução</button>
+        </div>
+
+        <div class="tab-content">
+          <!-- Aba de Informações Pessoais -->
+          <div id="tab-info" class="tab-pane active">
+            <div class="info-grid">
+              <div class="info-card">
+                <h3>Dados Pessoais</h3>
+                <div class="info-item">
+                  <label>Nome Completo:</label>
+                  <span id="info-nome"></span>
+                </div>
+                <div class="info-item">
+                  <label>Data de Nascimento:</label>
+                  <span id="info-nascimento"></span>
+                </div>
+                <div class="info-item">
+                  <label>Idade:</label>
+                  <span id="info-idade"></span>
+                </div>
+                <div class="info-item">
+                  <label>Sexo:</label>
+                  <span id="info-sexo"></span>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <h3>Contato</h3>
+                <div class="info-item">
+                  <label>Telefone:</label>
+                  <span id="info-telefone"></span>
+                </div>
+                <div class="info-item">
+                  <label>E-mail:</label>
+                  <span id="info-email"></span>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <h3>Informações Antropométricas</h3>
+                <div class="info-item">
+                  <label>Altura:</label>
+                  <span id="info-altura"></span>
+                </div>
+                <div class="info-item">
+                  <label>Peso:</label>
+                  <span id="info-peso"></span>
+                </div>
+                <div class="info-item">
+                  <label>IMC:</label>
+                  <span id="info-imc"></span>
+                </div>
+                <div class="info-item">
+                  <label>Classificação:</label>
+                  <span id="info-classificacao"></span>
+                </div>
+              </div>
+
+              <div class="info-card info-card-full">
+                <h3>Observações</h3>
+                <div class="info-item-full">
+                  <span id="info-observacoes">Nenhuma observação registrada.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aba de Histórico de Consultas -->
+          <div id="tab-consultas" class="tab-pane">
+            <div class="consultas-header">
+              <h3>Histórico de Consultas</h3>
+              <button class="btn-small">
+                <i class="fas fa-plus"></i> Nova Consulta
+              </button>
+            </div>
+            
+            <div class="consultas-list">
+              <div class="consulta-item">
+                <div class="consulta-data">12/03/2023</div>
+                <div class="consulta-info">
+                  <h4>Consulta de Acompanhamento</h4>
+                  <p>Paciente relatou melhora na alimentação. Peso reduzido em 2kg desde a última consulta.</p>
+                </div>
+                <div class="consulta-actions">
+                  <button class="btn-small"><i class="fas fa-eye"></i></button>
+                  <button class="btn-small"><i class="fas fa-edit"></i></button>
+                </div>
+              </div>
+              
+              <div class="consulta-item">
+                <div class="consulta-data">05/02/2023</div>
+                <div class="consulta-info">
+                  <h4>Primeira Consulta</h4>
+                  <p>Avaliação inicial. Plano alimentar prescrito.</p>
+                </div>
+                <div class="consulta-actions">
+                  <button class="btn-small"><i class="fas fa-eye"></i></button>
+                  <button class="btn-small"><i class="fas fa-edit"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aba de Evolução -->
+          <div id="tab-evolucao" class="tab-pane">
+            <div class="evolucao-header">
+              <h3>Evolução do Paciente</h3>
+              <div class="evolucao-filters">
+                <select>
+                  <option>Últimos 3 meses</option>
+                  <option>Últimos 6 meses</option>
+                  <option>Último ano</option>
+                  <option>Todo o histórico</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="evolucao-grafico">
+              <p class="placeholder-text">Gráfico de evolução de peso e IMC será exibido aqui.</p>
+              <!-- Aqui iria um gráfico real com Chart.js ou similar -->
+            </div>
+            
+            <div class="evolucao-dados">
+              <div class="dado-item">
+                <h4>Variação de Peso</h4>
+                <span class="dado-valor positivo">-5 kg</span>
+                <span class="dado-periodo">desde a primeira consulta</span>
+              </div>
+              
+              <div class="dado-item">
+                <h4>Variação de IMC</h4>
+                <span class="dado-valor positivo">-2.1</span>
+                <span class="dado-periodo">desde a primeira consulta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/paciente-detalhes.js"></script>
+</body>
+</html>

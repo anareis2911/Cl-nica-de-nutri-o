@@ -109,7 +109,7 @@
             <div class="patient-actions">
               <button class="btn-view"><i class="fas fa-eye"></i></button>
               <button class="btn-edit"><i class="fas fa-edit"></i></button>
-              <button class="btn-more"><i class="fas fa-ellipsis-v"></i></button>
+              <button class="btn-delete"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           
@@ -129,7 +129,7 @@
             <div class="patient-actions">
               <button class="btn-view"><i class="fas fa-eye"></i></button>
               <button class="btn-edit"><i class="fas fa-edit"></i></button>
-              <button class="btn-more"><i class="fas fa-ellipsis-v"></i></button>
+              <button class="btn-delete"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           
@@ -149,7 +149,7 @@
             <div class="patient-actions">
               <button class="btn-view"><i class="fas fa-eye"></i></button>
               <button class="btn-edit"><i class="fas fa-edit"></i></button>
-              <button class="btn-more"><i class="fas fa-ellipsis-v"></i></button>
+              <button class="btn-delete"><i class="fas fa-trash"></i></button>
             </div>
           </div>
         </div>
@@ -162,95 +162,96 @@
         </button>
       </div>
 
-      <!-- Modal de cadastro -->
-<!-- Modal de cadastro (substituir o existente) -->
-<div id="patientModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModalPaciente">
-  <div class="modal-content">
-    <span class="close" aria-label="Fechar">&times;</span>
-    <h2 id="tituloModalPaciente">Cadastrar Paciente</h2>
-    <form id="patientForm">
-      <div class="modal-grid">
-        <div class="form-control">
-          <label for="nome">Nome <span class="required">*</span></label>
-          <input type="text" id="nome" name="nome" required>
-          <span class="validation-message" id="nomeValidation"></span>
-        </div>
-        <div class="form-control">
-          <label for="dataNascimento">Data de Nascimento <span class="required">*</span></label>
-          <input type="date" id="dataNascimento" name="dataNascimento" required>
-          <span class="validation-message" id="dataNascimentoValidation"></span>
-        </div>
-        <div class="form-control">
-          <label for="idade">Idade</label>
-          <input type="number" id="idade" name="idade" min="0" readonly>
-        </div>
-        <div class="form-control">
-          <label for="sexo">Sexo <span class="required">*</span></label>
-          <select id="sexo" name="sexo" required>
-            <option value="">Selecione</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Outro">Outro</option>
-          </select>
-          <span class="validation-message" id="sexoValidation"></span>
-        </div>
-        <div class="form-control">
-          <label for="telefone">Telefone <span class="required">*</span></label>
-          <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
-          <span class="validation-message" id="telefoneValidation"></span>
-        </div>
-        <div class="form-control">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email">
-          <span class="validation-message" id="emailValidation"></span>
-        </div>
-        <div class="form-control">
-          <label for="altura">Altura (cm) <span class="required">*</span></label>
-          <input type="number" id="altura" name="altura" step="0.01" min="0" required>
-          <span class="validation-message" id="alturaValidation"></span>
-        </div>
-        <div class="form-control">
-          <label for="peso">Peso (kg) <span class="required">*</span></label>
-          <input type="number" id="peso" name="peso" step="0.01" min="0" required>
-          <span class="validation-message" id="pesoValidation"></span>
-        </div>
-        <div class="form-control">
-          <label for="imc">IMC</label>
-          <input type="text" id="imc" name="imc" readonly>
-        </div>
-        <div class="form-control">
-          <label for="classificacao">Classificação</label>
-          <input type="text" id="classificacao" name="classificacao" readonly>
-        </div>
-        <div class="form-control form-control--full">
-          <label for="observacoes">Observações</label>
-          <textarea id="observacoes" name="observacoes" rows="3"></textarea>
-        </div>
-      </div>
+      <!-- Modal de cadastro/edição -->
+      <div id="patientModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModalPaciente">
+        <div class="modal-content">
+          <span class="close" aria-label="Fechar">&times;</span>
+          <h2 id="tituloModalPaciente">Cadastrar Paciente</h2>
+          <form id="patientForm">
+            <input type="hidden" id="pacienteId" name="pacienteId" value="">
+            <div class="modal-grid">
+              <div class="form-control">
+                <label for="nome">Nome <span class="required">*</span></label>
+                <input type="text" id="nome" name="nome" required>
+                <span class="validation-message" id="nomeValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="dataNascimento">Data de Nascimento <span class="required">*</span></label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required>
+                <span class="validation-message" id="dataNascimentoValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="idade">Idade</label>
+                <input type="number" id="idade" name="idade" min="0" readonly>
+              </div>
+              <div class="form-control">
+                <label for="sexo">Sexo <span class="required">*</span></label>
+                <select id="sexo" name="sexo" required>
+                  <option value="">Selecione</option>
+                  <option value="Feminino">Feminino</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Outro">Outro</option>
+                </select>
+                <span class="validation-message" id="sexoValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="telefone">Telefone <span class="required">*</span></label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+                <span class="validation-message" id="telefoneValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email">
+                <span class="validation-message" id="emailValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="altura">Altura (cm) <span class="required">*</span></label>
+                <input type="number" id="altura" name="altura" step="0.01" min="0" required>
+                <span class="validation-message" id="alturaValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="peso">Peso (kg) <span class="required">*</span></label>
+                <input type="number" id="peso" name="peso" step="0.01" min="0" required>
+                <span class="validation-message" id="pesoValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="imc">IMC</label>
+                <input type="text" id="imc" name="imc" readonly>
+              </div>
+              <div class="form-control">
+                <label for="classificacao">Classificação</label>
+                <input type="text" id="classificacao" name="classificacao" readonly>
+              </div>
+              <div class="form-control form-control--full">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+              </div>
+            </div>
 
-      <div class="form-actions">
-        <button type="button" id="cancelButton" class="btn-secondary">Cancelar</button>
-        <button type="submit" class="btn-primary">Salvar</button>
+            <div class="form-actions">
+              <button type="button" id="cancelButton" class="btn-secondary">Cancelar</button>
+              <button type="submit" class="btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
-  </div>
-</div>
-<!-- /Modal -->
-      <!-- /Modal -->
+      <!-- /Modal de cadastro/edição -->
+
+      <!-- Modal de Confirmação de Exclusão -->
+      <div id="confirmModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModalConfirmacao">
+        <div class="modal-content confirm-modal">
+          <h2 id="tituloModalConfirmacao">Confirmar Exclusão</h2>
+          <p id="confirmMessage">Tem certeza que deseja excluir este paciente?</p>
+          <div class="form-actions">
+            <button type="button" id="cancelConfirmButton" class="btn-secondary">Cancelar</button>
+            <button type="button" id="confirmDeleteButton" class="btn-danger">Excluir</button>
+          </div>
+        </div>
+      </div>
+      <!-- /Modal de confirmação -->
     </main>
   </div>
-<!-- Modal de Confirmação de Exclusão -->
-<div id="confirmModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModalConfirmacao">
-  <div class="modal-content confirm-modal">
-    <h2 id="tituloModalConfirmacao">Confirmar Exclusão</h2>
-    <p id="confirmMessage">Tem certeza que deseja excluir este paciente?</p>
-    <div class="form-actions">
-      <button type="button" id="cancelConfirmButton" class="btn-secondary">Cancelar</button>
-      <button type="button" id="confirmDeleteButton" class="btn-danger">Excluir</button>
-    </div>
-  </div>
-</div>
-  <script src="js/pacientes.js"></script>
 
+  <script src="js/pacientes.js"></script>
 </body>
 </html>
