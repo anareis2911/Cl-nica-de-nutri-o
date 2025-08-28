@@ -63,7 +63,7 @@
             <button id="btn-edit" class="btn-edit-large">
               <i class="fas fa-edit"></i> Editar
             </button>
-            <button id="btn-consulta" class="btn-primary-large">
+            <button id="btn-consulta" class="btn-primary-large" onclick="redirectToConsultas()">
               <i class="fas fa-calendar-plus"></i> Nova Consulta
             </button>
           </div>
@@ -144,7 +144,7 @@
           <div id="tab-consultas" class="tab-pane">
             <div class="consultas-header">
               <h3>Histórico de Consultas</h3>
-              <button class="btn-small">
+              <button class="btn-small" onclick="redirectToConsultas()">
                 <i class="fas fa-plus"></i> Nova Consulta
               </button>
             </div>
@@ -214,6 +214,87 @@
     </main>
   </div>
 
+  <!-- Modal de edição de paciente (similar ao da página pacientes.html) -->
+  <div id="patientModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModalPaciente">
+    <div class="modal-content">
+      <span class="close" aria-label="Fechar">&times;</span>
+      <h2 id="tituloModalPaciente">Editar Paciente</h2>
+      <form id="patientForm">
+        <input type="hidden" id="pacienteId" name="pacienteId" value="">
+        <div class="modal-grid">
+          <div class="form-control">
+            <label for="nome">Nome <span class="required">*</span></label>
+            <input type="text" id="nome" name="nome" required>
+            <span class="validation-message" id="nomeValidation"></span>
+          </div>
+          <div class="form-control">
+            <label for="dataNascimento">Data de Nascimento <span class="required">*</span></label>
+            <input type="date" id="dataNascimento" name="dataNascimento" required>
+            <span class="validation-message" id="dataNascimentoValidation"></span>
+          </div>
+          <div class="form-control">
+            <label for="idade">Idade</label>
+            <input type="number" id="idade" name="idade" min="0" readonly>
+          </div>
+          <div class="form-control">
+            <label for="sexo">Sexo <span class="required">*</span></label>
+            <select id="sexo" name="sexo" required>
+              <option value="">Selecione</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Outro">Outro</option>
+            </select>
+            <span class="validation-message" id="sexoValidation"></span>
+          </div>
+          <div class="form-control">
+            <label for="telefone">Telefone <span class="required">*</span></label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+            <span class="validation-message" id="telefoneValidation"></span>
+          </div>
+          <div class="form-control">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email">
+            <span class="validation-message" id="emailValidation"></span>
+          </div>
+          <div class="form-control">
+            <label for="altura">Altura (cm) <span class="required">*</span></label>
+            <input type="number" id="altura" name="altura" step="0.01" min="0" required>
+            <span class="validation-message" id="alturaValidation"></span>
+          </div>
+          <div class="form-control">
+            <label for="peso">Peso (kg) <span class="required">*</span></label>
+            <input type="number" id="peso" name="peso" step="0.01" min="0" required>
+            <span class="validation-message" id="pesoValidation"></span>
+          </div>
+          <div class="form-control">
+            <label for="imc">IMC</label>
+            <input type="text" id="imc" name="imc" readonly>
+          </div>
+          <div class="form-control">
+            <label for="classificacao">Classificação</label>
+            <input type="text" id="classificacao" name="classificacao" readonly>
+          </div>
+          <div class="form-control form-control--full">
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelButton" class="btn-secondary">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- /Modal de edição -->
+
   <script src="js/paciente-detalhes.js"></script>
+  <script>
+    // Função para redirecionar para a página de consultas
+    function redirectToConsultas() {
+      window.location.href = 'consultas.html';
+    }
+  </script>
 </body>
 </html>

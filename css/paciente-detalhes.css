@@ -391,3 +391,161 @@
     align-items: flex-start;
   }
 }
+
+.btn-primary-large:hover, .btn-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+}
+
+/* Estilos para o modal de edição */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 720px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 20px;
+  position: relative;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content h2 {
+  margin: 0 0 12px 0;
+}
+
+.close {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 16px;
+  margin-top: 10px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control label {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  font-family: 'Arsenal', sans-serif;
+  font-size: 15px;
+}
+
+.form-control--full {
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn-secondary, .btn-primary {
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #e9ecef;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #dfe3e6;
+}
+
+.btn-primary {
+  background: #79BE80;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #67a96f;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Indicador de campo obrigatório */
+.required {
+  color: #e74c3c;
+}
+
+/* Mensagens de validação */
+.validation-message {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 4px;
+  display: none;
+}
+
+/* Campos inválidos */
+input:invalid, select:invalid {
+  border-color: #e74c3c;
+}
+
+input:invalid + .validation-message, 
+select:invalid + .validation-message {
+  display: block;
+}
+
+/* Campos válidos */
+input:valid, select:valid {
+  border-color: #79BE80;
+}
+
+/* Campos somente leitura */
+input[readonly] {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Campo de telefone com máscara */
+input[type="tel"] {
+  font-family: monospace;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+}

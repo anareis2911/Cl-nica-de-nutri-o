@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Nutricionista - Consultas</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/consultas.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Logo Clínica">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html"><i class="fa-solid fa-grid"></i></a></li>
+          <li><a href="pacientes.html"><i class="fa-solid fa-user"></i></a></li>
+          <li><a href="consultas.html" class="active"><i class="fa-solid fa-calendar"></i></a></li>
+          <li><a href="planos.html"><i class="fa-solid fa-utensils"></i></a></li>
+          <li><a href="relatorios.html"><i class="fa-solid fa-file-medical"></i></a></li>
+        </ul>
+      </nav>
+    </aside>
+<!-- Modal de Detalhes da Consulta -->
+<div id="consultaDetalhesModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <span class="close" id="closeDetalhesModal" aria-label="Fechar">&times;</span>
+    <h2>Detalhes da Consulta</h2>
+    <div class="modal-grid">
+      <div class="form-control">
+        <label>Paciente</label>
+        <input type="text" id="detalhePaciente" readonly>
+      </div>
+      <div class="form-control">
+        <label>Data</label>
+        <input type="text" id="detalheData" readonly>
+      </div>
+      <div class="form-control">
+        <label>Hora</label>
+        <input type="text" id="detalheHora" readonly>
+      </div>
+      <div class="form-control">
+        <label>Tipo</label>
+        <input type="text" id="detalheTipo" readonly>
+      </div>
+      <div class="form-control form-control--full">
+        <label>Observações</label>
+        <textarea id="detalheObservacoes" rows="3" readonly></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Conteúdo principal -->
+    <main>
+      <!-- Topo -->
+      <header class="header">
+        <div class="header-left">
+          <h1>Consultas</h1>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <p>Bem-vindo(a), <strong>Ana Carolina Reis</strong></p>
+            <div class="avatar">A</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Conteúdo da página de consultas -->
+      <section class="consultas-content">
+        <!-- Barra de pesquisa -->
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Pesquisar consulta...">
+          <button class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <!-- Filtros -->
+<div class="filters-container">
+  <div class="filter-control">
+    <label for="filtroDataInicio">De:</label>
+    <input type="date" id="filtroDataInicio">
+  </div>
+  <div class="filter-control">
+    <label for="filtroDataFim">Até:</label>
+    <input type="date" id="filtroDataFim">
+  </div>
+  <button class="btn-secondary" id="btnAplicarFiltro">Aplicar</button>
+  <button class="btn-secondary" id="btnLimparFiltro">Limpar</button>
+</div>
+
+        <!-- Lista de consultas -->
+        <div class="consultas-list">
+          <div class="list-header">
+            <span>Paciente</span>
+            <span>Data</span>
+            <span>Hora</span>
+            <span>Tipo</span>
+            <span>Ações</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rodapé da lista -->
+      <div class="consultas-footer">
+        <button class="btn-add-consulta">
+          <i class="fas fa-calendar-plus"></i> Agendar Consulta
+        </button>
+      </div>
+
+      <!-- Modal de cadastro/edição -->
+      <div id="consultaModal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-content">
+          <span class="close" aria-label="Fechar">&times;</span>
+          <h2 id="tituloModalConsulta">Agendar Consulta</h2>
+          <form id="consultaForm">
+            <input type="hidden" id="consultaId" name="consultaId" value="">
+            <div class="modal-grid">
+              <div class="form-control">
+  <label for="paciente">Paciente <span class="required">*</span></label>
+  <select id="paciente" name="paciente" required>
+    <option value="">Selecione um paciente</option>
+  </select>
+  <span class="validation-message" id="pacienteValidation"></span>
+</div>
+
+              <div class="form-control">
+                <label for="data">Data <span class="required">*</span></label>
+                <input type="date" id="data" name="data" required min="">
+                <span class="validation-message" id="dataValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="hora">Hora <span class="required">*</span></label>
+                <input type="time" id="hora" name="hora" required>
+                <span class="validation-message" id="horaValidation"></span>
+              </div>
+              <div class="form-control">
+                <label for="tipo">Tipo <span class="required">*</span></label>
+                <select id="tipo" name="tipo" required>
+                  <option value="">Selecione</option>
+                  <option value="Presencial">Presencial</option>
+                  <option value="Online">Online</option>
+                  <option value="Retorno">Retorno</option>
+                </select>
+                <span class="validation-message" id="tipoValidation"></span>
+              </div>
+              <div class="form-control form-control--full">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" id="cancelButton" class="btn-secondary">Cancelar</button>
+              <button type="submit" class="btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal de Confirmação de Exclusão -->
+      <div id="confirmModal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-content confirm-modal">
+          <h2>Confirmar Exclusão</h2>
+          <p id="confirmMessage">Tem certeza que deseja excluir esta consulta?</p>
+          <div class="form-actions">
+            <button type="button" id="cancelConfirmButton" class="btn-secondary">Cancelar</button>
+            <button type="button" id="confirmDeleteButton" class="btn-danger">Excluir</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script src="js/consultas.js"></script>
+  <script>
+    // Script para definir a data mínima como hoje
+    document.addEventListener('DOMContentLoaded', function() {
+      const dataInput = document.getElementById('data');
+      const hoje = new Date().toISOString().split('T')[0];
+      dataInput.setAttribute('min', hoje);
+      
+      // Validação adicional no envio do formulário
+      document.getElementById('consultaForm').addEventListener('submit', function(e) {
+        const dataSelecionada = dataInput.value;
+        
+        if (dataSelecionada < hoje) {
+          e.preventDefault();
+          document.getElementById('dataValidation').textContent = 'Não é possível agendar consultas para datas anteriores a hoje.';
+          dataInput.focus();
+        }
+      });
+      
+      // Limpar mensagem de validação quando o usuário alterar a data
+      dataInput.addEventListener('input', function() {
+        document.getElementById('dataValidation').textContent = '';
+      });
+    });
+  </script>
+</body>
+</html>
