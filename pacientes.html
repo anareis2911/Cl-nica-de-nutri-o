@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
   <div class="container">
     <!-- Sidebar -->
@@ -18,7 +20,7 @@
       </div>
       <nav>
         <ul>
-          <li><a href="dashboard.html"><i class="fa-solid fa-grid"></i></a></li>
+          <li><a href="index.html" class="nav-link" data-page="home"><i class="fa-solid fa-house"></i></a></li>
           <li><a href="pacientes.html" class="active"><i class="fa-solid fa-user"></i></a></li>
           <li><a href="consultas.html"><i class="fa-solid fa-calendar"></i></a></li>
           <li><a href="planos.html"><i class="fa-solid fa-utensils"></i></a></li>
@@ -51,7 +53,7 @@
             <i class="fas fa-search"></i>
           </button>
         </div>
-        
+
         <!-- Filtro alfabético -->
         <div class="alphabet-filter">
           <div class="letter-filter active">TODOS</div>
@@ -82,7 +84,7 @@
           <div class="letter-filter">Y</div>
           <div class="letter-filter">Z</div>
         </div>
-        
+
         <!-- Lista de pacientes -->
         <div class="patients-list">
           <div class="list-header">
@@ -112,7 +114,7 @@
               <button class="btn-delete"><i class="fas fa-trash"></i></button>
             </div>
           </div>
-          
+
           <div class="patient-item">
             <div class="patient-info">
               <div class="patient-avatar">B</div>
@@ -132,7 +134,7 @@
               <button class="btn-delete"><i class="fas fa-trash"></i></button>
             </div>
           </div>
-          
+
           <div class="patient-item">
             <div class="patient-info">
               <div class="patient-avatar">C</div>
@@ -254,4 +256,5 @@
 
   <script src="js/pacientes.js"></script>
 </body>
+
 </html>
