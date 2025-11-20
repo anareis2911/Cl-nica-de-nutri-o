@@ -1,0 +1,37 @@
+name: Checagem de erros JavaScript
+
+# O workflow roda automaticamente a cada push ou pull request
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint JavaScript
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar ESLint localmente
+        run: npm install eslint
+
+      - name: Rodar ESLint em todos os arquivos JS
+        run: npx eslint "**/*.js"
+
+      - name: Mostrar mensagem de sucesso
+        if: success()
+        run: echo "✔ Nenhum erro crítico encontrado no JavaScript!"
+
+      - name: Mostrar mensagem de falha
+        if: failure()
+        run: echo "✖ Foram encontrados erros no JavaScript! Verifique o log acima."
